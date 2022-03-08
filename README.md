@@ -21,6 +21,9 @@ We need to add InfluxDB query as Data source in Grafana and provide the respecti
 Along with Installations, the below Python libraries should also be installed:
   - pyserial, paho-mqtt, influxdb-client, kafka-python, numpy, PyYAML, pandas, matplotlib, statsmodels, seaborn, scikit-learn
 
+After downloading the respective softwares and libaries, edit the config.yaml file with the respective configurations of MQTT Broker,
+Kafka Broker and InfluxDB. Some Kafka topics can be excluded from the config file depending on the requirement.
+
 **Explanation**
 
 1. MQTT
@@ -38,3 +41,4 @@ Along with Installations, the below Python libraries should also be installed:
     - Linear_Regression_Model.py: It queries data from InfluxDB and calculates the future values using Linear Regression model.
     - Time_Series.py: It queries data from InfluxDB and calculates seasonality, trend from the data and also decomposes the data. 
 
+5. Config.yaml: It contains the configuration data for the entire Project

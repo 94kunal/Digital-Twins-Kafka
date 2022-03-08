@@ -1,0 +1,22 @@
+Configurations:
+
+- MQTT:
+    broker: "xxx"
+    port: 0000
+    username: "xxx"
+    password: "xxx"
+    topic: "xxx"
+
+- KAFKA:
+    broker: 'xxx'
+    topic: "xxx"
+    Matlab_Topic: "xxx"
+    Heater_Topic: "xxx"
+    Java_Matlab_Queue_Topic: "xxx"
+    Java_Direct_Topic: "xxx"
+
+- INFLUXDB:
+    token: "xxx"
+    org: "xxx"
+    bucket: "xxx"
+    host: "xxx"

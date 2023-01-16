@@ -1,0 +1,95 @@
+version: '3.9'
+
+services:
+ mosquitto:
+   container_name: mqtt
+   image: eclipse-mosquitto
+   restart: always
+   volumes:
+   - /home/kunal/mosquitto/config:/mosquitto/config
+   - /home/kunal/mosquitto/data:/mosquitto/data
+   - /home/kunal/mosquitto/log:/mosquitto/log
+   ports:
+    - 1883:1883
+    - 9001:9001
+
+ zookeeper:
+   image: confluentinc/cp-zookeeper:latest
+   container_name: zookeeper
+   networks:
+     - kafka_network
+   environment:
+     ZOOKEEPER_CLIENT_PORT: 2181
+     ZOOKEEPER_TICK_TIME: 2000
+   ports:
+    - "2181:2181"
+
+ kafka:
+   image: confluentinc/cp-kafka:latest
+   container_name: kafka
+   networks:
+     - kafka_network
+   depends_on:
+     - zookeeper
+   ports:
+   - "29092:29092"
+   environment:
+     KAFKA_BROKER_ID: 1
+     KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+     KAFKA_LISTENERS: EXTERNAL_SAME_HOST://:29092,INTERNAL://:9092
+     KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:29092
+     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT
+     KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+     KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+ grafana:
+   image: grafana/grafana
+   container_name: grafana
+   restart: always
+   ports:
+     - 3000:3000
+   networks:
+     - grafana_network
+   volumes:
+     - /home/kunal/grafana_data:/var/lib/grafana
+   depends_on:
+     - influxdb
+
+ influxdb:
+   image: influxdb:latest
+   container_name: influxdb
+   restart: always
+   ports:
+     - 8086:8086
+   networks:
+     - grafana_network
+   volumes:
+     - /home/kunal/influxdb_data:/var/lib/influxdb
+   environment:
+     - INFLUXDB_DB=grafana
+     - INFLUXDB_USER=kunal
+     - INFUXDB_USER_PASSWORD=picocamera123
+     - INFLUXDB_ADMIN_ENABLED=true
+     - INFLUXDB_ADMIN_USER=admin
+     - INFLUXDB_ADMIN_PASSWORD=picocamera123
+     - INFLUXDB_HTTP_AUTH_ENABLED=true
+     - DOCKER_INFLUXDB_INIT_MODE=setup
+     - DOCKER_INFLUXDB_INIT_USERNAME=kunal
+     - DOCKER_INFLUXDB_INIT_PASSWORD=picocamera123
+     - DOCKER_INFLUXDB_INIT_ORG=PICOCAMERA
+     - DOCKER_INFLUXDB_INIT_BUCKET=Sensor_Data
+     - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=foSwI9WyZHKQct2Q2CJkMFCQb8GrwcMuF-F6L2shSYgPQwYNY_EhWQVuUd31aeMKfGKmrp1zejDyR5AU2a4fGA==
+
+networks:
+  grafana_network:
+  kafka_network:
+    name: kafka_docker_net
+volumes:
+  influxdb_data:
+  grafana_data:
+
+
+
+
+
+

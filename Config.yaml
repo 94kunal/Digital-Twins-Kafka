@@ -6,7 +6,7 @@ Configurations:
     username: "kunal"
     password: "picocamera123"
     topic: "Sensor/Values"
-    serial_port: /dev/ttyACM0
+    serial_port: "COM3"
 
 - KAFKA:
     broker: 'localhost:29092'

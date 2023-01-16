@@ -1,22 +1,9 @@
 from kafka import KafkaConsumer
 import pathlib
-import yaml
 import json
 import time
-import random
-import string
 
-
-def yaml_loadfile(filepath):
-    with open(filepath, 'r') as f:
-        data = yaml.safe_load(f)
-    return data
-
-
-def consumer_group_id():
-    num_of_string_char = 10
-    consumer_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=num_of_string_char))
-    return str(consumer_id)
+from utilities import yaml_loadfile, consumer_group_id
 
 
 class Kafka_Consumer:
@@ -29,13 +16,12 @@ class Kafka_Consumer:
 
         self.consumer = KafkaConsumer(self.details[1]['KAFKA']['topic'],
                                       bootstrap_servers=[self.details[1]['KAFKA']['broker']],
-                                      auto_offset_reset='latest',
+                                      auto_offset_reset='earliest',
                                       group_id=consumer_group_id()
                                       )
         print("Starting MQTT-KAFKA Consumer")
 
     def get_data(self):
-
         while True:
             for msg in self.consumer:
                 timestamp = int(round(time.time() * 1000))

@@ -1,22 +1,19 @@
 Configurations:
 
 - MQTT:
-    broker: "xxx"
-    port: 0000
-    username: "xxx"
-    password: "xxx"
-    topic: "xxx"
+    broker: localhost
+    port: 1883
+    username: "kunal"
+    password: "picocamera123"
+    topic: "Sensor/Values"
+    serial_port: /dev/ttyACM0
 
 - KAFKA:
-    broker: 'xxx'
-    topic: "xxx"
-    Matlab_Topic: "xxx"
-    Heater_Topic: "xxx"
-    Java_Matlab_Queue_Topic: "xxx"
-    Java_Direct_Topic: "xxx"
+    broker: 'localhost:29092'
+    topic: "RealTime_Data"
 
 - INFLUXDB:
-    token: "xxx"
-    org: "xxx"
-    bucket: "xxx"
-    host: "xxx"
+    host: "http://localhost:8086"
+    org: "PICOCAMERA"
+    bucket: "Sensor_Data"
+

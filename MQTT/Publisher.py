@@ -42,7 +42,7 @@ class Mqtt_Publisher:
                                       )
 
         self.publisher.connect(self.details[0]['MQTT']['broker'], self.details[0]['MQTT']['port'], keepalive=250)
-        self.ser = serial.Serial('COM3', 9600, timeout=1, parity=serial.PARITY_NONE,
+        self.ser = serial.Serial(self.details[0]['MQTT']['serial_port'], 9600, timeout=1, parity=serial.PARITY_NONE,
                                  stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS)
 
         print("Established Connection with Raspberry Pi Pico Board")

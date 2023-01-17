@@ -16,6 +16,7 @@ services:
  zookeeper:
    image: confluentinc/cp-zookeeper:latest
    container_name: zookeeper
+   restart: always
    networks:
      - kafka_network
    environment:
@@ -27,6 +28,7 @@ services:
  kafka:
    image: confluentinc/cp-kafka:latest
    container_name: kafka
+   restart: always
    networks:
      - kafka_network
    depends_on:

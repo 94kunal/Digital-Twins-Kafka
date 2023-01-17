@@ -16,7 +16,7 @@ class Kafka_Consumer:
 
         self.consumer = KafkaConsumer(self.details[1]['KAFKA']['topic'],
                                       bootstrap_servers=[self.details[1]['KAFKA']['broker']],
-                                      auto_offset_reset='earliest',
+                                      auto_offset_reset='latest',
                                       group_id=consumer_group_id()
                                       )
         print("Starting MQTT-KAFKA Consumer")

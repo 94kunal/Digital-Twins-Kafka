@@ -5,7 +5,6 @@ import pathlib
 import json
 from utilities import yaml_loadfile
 
-
 class InfluxDB_Consumer:
 
     def __init__(self):
@@ -29,7 +28,6 @@ class InfluxDB_Consumer:
             print("Error in establishing InfluxDB and Kafka Pipeline")
 
     def get_data(self):
-
         while True:
             for msg in self.consumer:
                 Sensor_Data = json.loads(msg.value)

@@ -3,10 +3,10 @@ FROM python:3.10.6
 
 WORKDIR /usr/src/app
 
-COPY Digital-Twins-Kafka/MQTT-KAFKA/requirements.txt ./
-COPY Digital-Twins-Kafka/Config.yaml /usr/src/
-COPY Digital-Twins-Kafka/utilities.py ./
-COPY Digital-Twins-Kafka/MQTT-KAFKA/MQTT_Kafka_Bridge.py ./
+COPY requirements.txt ./
+COPY ./Config.yaml /usr/src/
+COPY ./utilities.py ./
+COPY ./MQTT-KAFKA/MQTT_Kafka_Bridge.py ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 

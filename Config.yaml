@@ -3,7 +3,7 @@ Configurations:
 # To run it from the container, use the Ip address of the host machine. 1883 is default port
 # Here '192.168.x.x' is the IP of the local host machine, Please don't use localhost(127.0.0.1)
 - MQTT:
-    broker: 192.168.49.1
+    broker: 192.168.x.x
     port: 1883
     username: "kunal"
     password: "picocamera123"
@@ -20,6 +20,6 @@ Configurations:
 # To communicate it from inside docker container use the IP address of the host machine.
 # In this case the IP address of machine is used as: http://192.168.x.x:8086 , 8086 s default port
 - INFLUXDB:
-    host: "http://192.168.49.1:8086"
+    host: "http://192.168.x.x:8086"
     org: "PICOCAMERA"
     bucket: "Sensor_Data"

@@ -9,6 +9,7 @@ from kafka import KafkaConsumer
 from threading import *
 import time
 
+
 def on_connect(client, userdata, flags, rc=0):
     if rc == 0:
         print("Connection to the MQTT-Broker is successful and Publishing Data to MQTT-Broker")
@@ -91,6 +92,7 @@ class Mqtt_Publisher:
                     # time.sleep(1)
                     # self.ser.write(heater_on_command())
                     print("HEATER TURNING ON AFTER 1 MINUTE!!")
+
 
 Mqtt_Publisher_object = Mqtt_Publisher()
 t1 = Thread(target=Mqtt_Publisher_object.get_data)

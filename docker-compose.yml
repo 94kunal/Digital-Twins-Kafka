@@ -80,15 +80,15 @@ services:
      - DOCKER_INFLUXDB_INIT_PASSWORD=picocamera123
      - DOCKER_INFLUXDB_INIT_ORG=PICOCAMERA
      - DOCKER_INFLUXDB_INIT_BUCKET=Sensor_Data
-     - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=mytoken
+     - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=foSwI9WyZHKQct2Q2CJkMFCQb8GrwcMuF-F6L2shSYgPQwYNY_EhWQVuUd31aeMKfGKmrp1zejDyR5AU2a4fGA==
 
  kafka_producer:
-   image: producer-kafka
+   image: 94kunal/producer-kafka:v1
    build:
      context: .
      dockerfile: ./MQTT/Dockerfile
    container_name: Producer_Kafka
-   restart: on-failure
+   restart: unless-stopped
    networks:
       - kafka_network
    devices:
@@ -97,12 +97,12 @@ services:
      - kafka
 
  kafka_mqtt_bridge:
-   image: mqtt-kafka-bridge
+   image: 94kunal/mqtt-kafka-bridge:v1
    build:
      context: .
      dockerfile: ./MQTT-KAFKA/Dockerfile
    container_name: Mqtt_Kafka_Bridge
-   restart: on-failure
+   restart: unless-stopped
    networks:
      - kafka_network
    depends_on:
@@ -110,12 +110,12 @@ services:
      - kafka_producer
 
  kafka_consumer:
-   image: consumer-kafka
+   image: 94kunal/consumer-kafka:v1
    build:
      context: .
      dockerfile: ./Kafka/Dockerfile
    container_name: Consumer_Kafka
-   restart: on-failure
+   restart: unless-stopped
    networks:
      - kafka_network
    depends_on:
@@ -123,14 +123,14 @@ services:
      - kafka_mqtt_bridge
 
  kafka_influxdb_consumer:
-   image: influxdb-kafka-ingestion
+   image: 94kunal/influxdb-kafka-ingestion:v1
    build:
      context: .
      dockerfile: ./InfluxDB/Dockerfile
    container_name: influxdb_Kafka_ingestion
-   restart: on-failure
+   restart: unless-stopped
    environment:
-     - INFLUXDB_TOKEN=mytoken
+     - INFLUXDB_TOKEN=foSwI9WyZHKQct2Q2CJkMFCQb8GrwcMuF-F6L2shSYgPQwYNY_EhWQVuUd31aeMKfGKmrp1zejDyR5AU2a4fGA==
    networks:
      - kafka_network
    depends_on:

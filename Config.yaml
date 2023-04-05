@@ -3,22 +3,23 @@ Configurations:
 # To run it from the container, use the Ip address of the host machine. 1883 is default port
 # Here '192.168.x.x' is the IP of the local host machine, Please don't use localhost(127.0.0.1)
 - MQTT:
-    broker: 192.168.x.x
+    broker: 192.168.49.1
     port: 1883
-    username: "user"
-    password: "password"
-    topic: "topic name"
+    username: "kunal"
+    password: "picocamera123"
+    topic: "Sensor/Values"
     serial_port: /dev/ttyACM0
 # To run a python Kafka client from outside Docker container use "localhost:29092" as Kafka broker
 # Here 'kafka:9092' is the name of the container and 9092 is defined in docker_compose.yml as the port to
 # connect to inside kafka.
 - KAFKA:
+    #broker: localhost:29092
     broker: 'kafka:9092'
-    topic: "topic name"
+    topic: "RealTime_Data"
 # To run a python InfluxDB client from outside docker container use "http://localhost:8086".
 # To communicate it from inside docker container use the IP address of the host machine.
 # In this case the IP address of machine is used as: http://192.168.x.x:8086 , 8086 s default port
 - INFLUXDB:
-    host: "http://192.168.x.x:8086"
-    org: "org name"
-    bucket: "bucket name"
+    host: "http://192.168.49.1:8086"
+    org: "PICOCAMERA"
+    bucket: "Sensor_Data"

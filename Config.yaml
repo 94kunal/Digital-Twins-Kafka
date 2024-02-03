@@ -3,6 +3,8 @@ Configurations:
 # To run it from the container, use the Ip address of the host machine. 1883 is default port
 # Here '192.168.x.x' is the IP of the local host machine, Please don't use localhost(127.0.0.1)
 - MQTT:
+    server_ip: 192.168.x.x
+    server_port: 2222
     broker: 192.168.x.x
     port: 1883
     username: "user"
@@ -13,6 +15,7 @@ Configurations:
 # Here 'kafka:9092' is the name of the container and 9092 is defined in docker_compose.yml as the port to
 # connect to inside kafka.
 - KAFKA:
+    #broker: localhost:29092
     broker: 'kafka:9092'
     topic: "topic name"
 # To run a python InfluxDB client from outside docker container use "http://localhost:8086".
